@@ -11,11 +11,17 @@
 </head>
 <body>
 
-    <script>
-     var name=prompt('ваше имя?');
-     var surname=prompt('ваша фамилия?');
-     var patronymic=prompt('ваше отчество?');
-     alert("вас зовут:"+" "+surname+" "+name+" "+" "+patronymic);
-    </script>
+<script>
+    var name=prompt('ваше имя?');
+    var surname=prompt('ваша фамилия?');
+    var patronymic=prompt('ваше отчество?');
+    var age=prompt('ваш возраст?');
+    var evidence=`ваши данные:
+     ${name}
+     ${surname}
+     ${patronymic}
+     возраст:${age+" лет"}`
+    alert(evidence)
+</script>
 </body>
 </html>
