@@ -12,68 +12,35 @@
 <body>
 
 <script>
-    var num1= + prompt ("введите первое число","0");
-    for(let i=0;i<Infinity;i++){
-        if(num1 == '' ){
-            alert('вы не ввели первое число');
-            num1= + prompt ("введите первое число","0");
-        } else {
+    const color='зеленый';
+    var guess = prompt("какой цвет я загадал ? у вас 3 попытки");
+    var numberGuess=1;
+
+    function showMessageYes() {
+        alert("молодец , угадал");
+    }
+    function showMessageNo() {
+        alert("неугадали, попробуйте еще раз");
+    }
+
+    while (numberGuess != 3){
+        numberGuess++;
+        if(guess===color) {
+            showMessageYes()
             break;
+        }
+        if (guess !== color){
+            showMessageNo()
+            guess = prompt("какой цвет я загадал ?");
+        }
+        if(numberGuess ==3 && guess !== color){
+            alert("это была последняя попытка , вы не угадали");
+        }else if(numberGuess ==3 && guess === color){
+            showMessageYes()
         }
     }
 
-    var num2= + prompt ("введите второе число","0");
-    for(let i=0;i<Infinity;i++){
-        if(num2 == '' ){
-            alert('вы не ввели второе число');
-            num2= + prompt ("введите второе число","0");
-        } else {
-            break;
-        }
-    }
 
-    var sign= prompt ("введите знак");
-    for(let i=0;i<Infinity;i++){
-        if(sign == '' ){
-            alert('вы не ввели знак');
-            sign= + prompt ("введите знак","0");
-        } else {
-            break;
-        }
-    }
-    function sum(num1,num2) {
-        return alert("сумма равна" + " " + (num1 + num2))
-    }
-
-    function sub(num1,num2) {
-        return alert("разность равна" + " " + (num1 - num2));
-    }
-    function divide(num1,num2) {
-        return alert ("частное равно" + " " + (num1 / num2));
-    }
-
-    function multiply(num1,num2) {
-        return alert ("произведение равно" + " " + (num1 * num2));
-    }
-
-    function calculate(num1,num2,sign) {
-       switch (sign) {
-           case "+":sum(num1,num2);
-           break;
-           case "-":sub(num1,num2);
-           break;
-           case "*":multiply(num1,num2);
-           break;
-           case "/":divide(num1,num2);
-           break;
-           default:alert ("я не умею делать такие действия");
-       };
-
-    }
-
-    calculate(num1,num2,sign)
-    // не понимаю как правильно записать условие
-    // если пользователь некорректно вводит данные
 </script>
 </body>
 </html>
