@@ -12,50 +12,68 @@
 <body>
 
 <script>
-    /*калькулятор  */
-    // var num1= + prompt ("введите первое число");
-    // var num2= + prompt ("введите второе число");
-    // var sign= prompt ("введите знак");
-    // switch (sign) {
-    //     case "+":
-    //         alert ("сумма равна" + " " + (num1 + num2));
-    //         break;
-    //     case "-" :
-    //         alert ("разность равна" + " " + (num1 - num2));
-    //         break;
-    //     case "*" :
-    //         alert ("произведение равно" + " " + (num1 * num2));
-    //         break;
-    //     case "/" :
-    //         alert ("частное равно" + " " + (num1 / num2));
-    //         break;
-    //     default:
-    //         alert ("я не умею делать такие действия");
-    // }
+    var num1= + prompt ("введите первое число","0");
+    for(let i=0;i<Infinity;i++){
+        if(num1 == '' ){
+            alert('вы не ввели первое число');
+            num1= + prompt ("введите первое число","0");
+        } else {
+            break;
+        }
+    }
 
-    /*сумма чисел*/
-    // var sum = 0;
-    // var num = + prompt ("введите число");
-    // if( num > 10 ){
-    //     for ( let i = 1; i <= num ; i++ ){
-    //         sum = sum + i;
-    //     }
-    //     alert ("сумма чисел от 1 до" + " "+ num + " " + "равна" + " " + sum);
-    // } else {
-    //     alert ("введите число больше 10 ")
-    // }
+    var num2= + prompt ("введите второе число","0");
+    for(let i=0;i<Infinity;i++){
+        if(num2 == '' ){
+            alert('вы не ввели второе число');
+            num2= + prompt ("введите второе число","0");
+        } else {
+            break;
+        }
+    }
 
-    /*функция*/
-    // function func(param) {
-    //   if (typeof param === "number"){
-    //       return 1;
-    //   } else if (typeof param === "string"){
-    //       return 0;
-    //   } else {
-    //       return -1
-    //   }
-    // }
-    // console.log(func(10))
+    var sign= prompt ("введите знак");
+    for(let i=0;i<Infinity;i++){
+        if(sign == '' ){
+            alert('вы не ввели знак');
+            sign= + prompt ("введите знак","0");
+        } else {
+            break;
+        }
+    }
+    function sum(num1,num2) {
+        return alert("сумма равна" + " " + (num1 + num2))
+    }
+
+    function sub(num1,num2) {
+        return alert("разность равна" + " " + (num1 - num2));
+    }
+    function divide(num1,num2) {
+        return alert ("частное равно" + " " + (num1 / num2));
+    }
+
+    function multiply(num1,num2) {
+        return alert ("произведение равно" + " " + (num1 * num2));
+    }
+
+    function calculate(num1,num2,sign) {
+       switch (sign) {
+           case "+":sum(num1,num2);
+           break;
+           case "-":sub(num1,num2);
+           break;
+           case "*":multiply(num1,num2);
+           break;
+           case "/":divide(num1,num2);
+           break;
+           default:alert ("я не умею делать такие действия");
+       };
+
+    }
+
+    calculate(num1,num2,sign)
+    // не понимаю как правильно записать условие
+    // если пользователь некорректно вводит данные
 </script>
 </body>
 </html>
