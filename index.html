@@ -12,34 +12,11 @@
 <body>
 
 <script>
-    const color='зеленый';
-    var guess = prompt("какой цвет я загадал ? у вас 3 попытки");
-    var numberGuess=1;
-
-    function showMessageYes() {
-        alert("молодец , угадал");
-    }
-    function showMessageNo() {
-        alert("неугадали, попробуйте еще раз");
-    }
-
-    while (numberGuess != 3){
-        numberGuess++;
-        if(guess===color) {
-            showMessageYes()
-            break;
-        }
-        if (guess !== color){
-            showMessageNo()
-            guess = prompt("какой цвет я загадал ?");
-        }
-        if(numberGuess ==3 && guess !== color){
-            alert("это была последняя попытка , вы не угадали");
-        }else if(numberGuess ==3 && guess === color){
-            showMessageYes()
-        }
-    }
-
+   function substringExists(str,sub) {
+       let result = str.indexOf(sub) >= 0;
+       console.log(result);
+   }
+   substringExists('Я люблю круассаны' ,'люблю');
 
 </script>
 </body>
