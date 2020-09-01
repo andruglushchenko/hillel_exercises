@@ -1,23 +1,90 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
-<script>
-   function substringExists(str,sub) {
-       let result = str.indexOf(sub) >= 0;
-       console.log(result);
-   }
-   substringExists('Я люблю круассаны' ,'люблю');
+    <script>
+    // угадай число 
+    //     let number = Math.floor(Math.random() * 100);
+    //     let guess; /*вводит пользователь через prompt*/
+    //     let valid = true;
+    //     let attempt = 0;
 
-</script>
+    //     getNumber();
+    //     getValid();
+        
+    //     while (attempt != 4 && getValid()) {
+    //         attempt++;
+    //         if (guess == number) {
+    //             showYes();
+    //             break;
+    //         } else if (guess > number) {
+    //             guess = prompt(`меньше , осталось ${5 - attempt} попытки`);
+    //             getValid();
+    //         } else {
+    //             guess = prompt(`больше , осталось ${5 - attempt} попытки`);
+    //             getValid()
+    //         }
+    //         if((attempt==4) && (guess !== number) && getValid()){
+    //             showNumber()
+    //         }
+    //     }
+
+    //     // функция получает от пользователя число(string)
+    //     function getNumber(){
+    //         guess=prompt('какое число я загадал')
+    //     }
+
+    //     // функция проверяет число на валидность(boolean)
+    //     function getValid(){
+    //     if(guess=='' || isNaN(guess)){
+    //         alert('введите число');
+    //         getNumber()
+    //     }else if(guess==null){
+    //         valid=false;
+    //     }
+    //     return valid;
+    //    }
+
+    //      //    функция выводит сообщение число угадано
+    //    function showYes(){
+    //     alert('угадал');
+    //    }
+
+    //     //    функция выводит сообщение какое число было загадано
+    //     function showNumber(){
+    //     alert(`я загадывал ${number} , ты не угадал`);
+    //    }
+=============================================================
+
+
+
+// переворот строки
+// function reverseNumber(n){
+//     let num1=String(n);
+//     let num2;
+//     let str='';
+//     for(let i = num1.length - 1; i >= 0; i--){
+//         str=str+num1[i];
+//         num2=+str;
+//     }
+//     console.log(num2)
+//     return num2;
+    
+// }
+// reverseNumber(123456789)
+
+  </script>
 </body>
+
 </html>
