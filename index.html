@@ -13,25 +13,23 @@
 
   <body>
     <script>
-      //  Функция explainer сделает НОВЫЙ "обяъснительный" массив
-      //  @param {array} - массив
-      //  @returns {array} - новый массив из объектов
-
-      function explaineArr(arr) {
-        let newArr = [];
-        let objNum;
-        let objStr;
-        let objBoolean;
-
-        for (var i = arr.length - 1; i >= 0; i--) {
-          if (!arr[i]) {
+      function getCleanerArrey(arr) {
+        for (var i = 0; i <= arr.length - 1; i++) {
+          if (isEmpty(arr[i])) {
             removeElement();
-          } else {
-            newArr.push(checkTypeOfElement());
           }
         }
-        console.log(newArr);
-        return newArr;
+        console.log(arr);
+        return arr;
+
+        // функция проверяет заполнен ли объект
+        // @returns{true || false}
+        function isEmpty() {
+          for (let key in arr[i]) {
+            return false;
+          }
+          return true;
+        }
 
 
         // функция удаляет элемент массива
@@ -40,48 +38,14 @@
           arr.splice(i, 1);
           return arr;
         }
-
-        // @param{number}
-        // @returns{object}
-        function createObjectNumber() {
-          objNum = {
-            number: arr[i],
-          };
-          return objNum;
-        }
-
-        // @param{boolean}
-        // @returns{object}
-        function createObjectBoolean() {
-          objBoolean = {
-            boolean: true,
-          };
-          return objBoolean;
-        }
-
-        // @param{string}
-        // @returns{object}
-        function createObjectString() {
-          objStr = {
-            string: arr[i],
-            length: arr[i].length,
-          };
-          return objStr;
-        }
-
-        // @param{arr[i]}(число || строка || true)
-        // @returns{object}
-        function checkTypeOfElement() {
-          if (typeof arr[i] == "number") {
-            return createObjectNumber();
-          } else if (typeof arr[i] == "string") {
-            return createObjectString();
-          } else {
-            return createObjectBoolean();
-          }
-        }
       }
-      explaineArr([10, "Hello world", null, true, "", false, 255]);
+      getCleanerArrey([
+        { name: "John", age: 30 },
+        { surname: "Smith" },
+        {},
+        { height: 182 },
+        {},
+      ]);
     </script>
   </body>
 </html>
