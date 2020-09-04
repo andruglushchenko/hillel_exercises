@@ -1,36 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <script>
-    
-// шахматная доска
+      //  Функция explainer сделает НОВЫЙ "обяъснительный" массив
+      //  @param {array} - массив
+      //  @returns {array} - новый массив из объектов
 
-function generateChessBoard(num){
-    let board = "";
-    for(var i = 0; i < num; i++){
-        for(var a = 1; a < num; a++){
-             board += (a % 2) == (i % 2) ? " " : "#";
+      function explaineArr(arr) {
+        let newArr = [];
+        let objNum;
+        let objStr;
+        let objBoolean;
+
+        for (var i = arr.length - 1; i >= 0; i--) {
+          if (!arr[i]) {
+            removeElement();
+          } else {
+            newArr.push(checkTypeOfElement());
+          }
         }
-        board += "\n";
+        console.log(newArr);
+        return newArr;
+
+
+        // функция удаляет элемент массива
+        // @returns{arrey}-новый массив
+        function removeElement() {
+          arr.splice(i, 1);
+          return arr;
         }
-    console.log(board);
-}
-generateChessBoard(8)
 
+        // @param{number}
+        // @returns{object}
+        function createObjectNumber() {
+          objNum = {
+            number: arr[i],
+          };
+          return objNum;
+        }
 
-  </script>
-</body>
+        // @param{boolean}
+        // @returns{object}
+        function createObjectBoolean() {
+          objBoolean = {
+            boolean: true,
+          };
+          return objBoolean;
+        }
 
+        // @param{string}
+        // @returns{object}
+        function createObjectString() {
+          objStr = {
+            string: arr[i],
+            length: arr[i].length,
+          };
+          return objStr;
+        }
+
+        // @param{arr[i]}(число || строка || true)
+        // @returns{object}
+        function checkTypeOfElement() {
+          if (typeof arr[i] == "number") {
+            return createObjectNumber();
+          } else if (typeof arr[i] == "string") {
+            return createObjectString();
+          } else {
+            return createObjectBoolean();
+          }
+        }
+      }
+      explaineArr([10, "Hello world", null, true, "", false, 255]);
+    </script>
+  </body>
 </html>
