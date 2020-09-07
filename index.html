@@ -13,21 +13,22 @@
 
   <body>
     <script>
-      let arr = [1, 2, 3, 4, 5];
-      let newArr;
-      function getCube(item) {
-        return item ** 3;
-      }
-      function getSquare(item) {
-        return item ** 2;
-      }
-      function showElementsNewArr(callback) {
-        newArr = arr.map((item) => callback(item));
-        console.log(newArr);
-        return newArr;
-      }
+      let vasia = { name: "Вася", age: 25 };
+      let petia = { name: "Петя", age: 30 };
+      let masha = { name: "Маша", age: 28 };
+      let egor = { name: "Егор", age: 40 };
+      let dima = { name: "Дима", age: 35 };
+      let lena = { name: "Лена", age: 18 };
 
-      showElementsNewArr(getCube);
+      let users = [vasia, petia, masha, egor, dima, lena];
+      let result;
+      function getYoungEmployees(users) {
+        result = users.filter((item) => item["age"] < 30);
+        result = result.map((item) => item["name"]);
+        console.log(result);
+        return result;
+      }
+      getYoungEmployees(users);
     </script>
   </body>
 </html>
