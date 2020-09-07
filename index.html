@@ -13,39 +13,21 @@
 
   <body>
     <script>
-      function getCleanerArrey(arr) {
-        for (var i = 0; i <= arr.length - 1; i++) {
-          if (isEmpty(arr[i])) {
-            removeElement();
-          }
-        }
-        console.log(arr);
-        return arr;
-
-        // функция проверяет заполнен ли объект
-        // @returns{true || false}
-        function isEmpty() {
-          for (let key in arr[i]) {
-            return false;
-          }
-          return true;
-        }
-
-
-        // функция удаляет элемент массива
-        // @returns{arrey}-новый массив
-        function removeElement() {
-          arr.splice(i, 1);
-          return arr;
-        }
+      let arr = [1, 2, 3, 4, 5];
+      let newArr;
+      function getCube(item) {
+        return item ** 3;
       }
-      getCleanerArrey([
-        { name: "John", age: 30 },
-        { surname: "Smith" },
-        {},
-        { height: 182 },
-        {},
-      ]);
+      function getSquare(item) {
+        return item ** 2;
+      }
+      function showElementsNewArr(callback) {
+        newArr = arr.map((item) => callback(item));
+        console.log(newArr);
+        return newArr;
+      }
+
+      showElementsNewArr(getCube);
     </script>
   </body>
 </html>
