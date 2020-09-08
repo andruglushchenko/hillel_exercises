@@ -13,22 +13,22 @@
 
   <body>
     <script>
-      let vasia = { name: "Вася", age: 25 };
-      let petia = { name: "Петя", age: 30 };
-      let masha = { name: "Маша", age: 28 };
-      let egor = { name: "Егор", age: 40 };
-      let dima = { name: "Дима", age: 35 };
-      let lena = { name: "Лена", age: 18 };
+      let arr = [1, 2, 3, 4, 5];
+      function myMap(arr, callback) {
+        var newarr = [];
+        arr.forEach((item) => newarr.push(callback(item)));
 
-      let users = [vasia, petia, masha, egor, dima, lena];
-      let result;
-      function getYoungEmployees(users) {
-        result = users.filter((item) => item["age"] < 30);
-        result = result.map((item) => item["name"]);
-        console.log(result);
-        return result;
+        console.log(newarr);
+        return newarr;
       }
-      getYoungEmployees(users);
+
+
+      
+      function getCube(item) {
+        return item ** 3;
+      }
+
+      myMap(arr, getCube);
     </script>
   </body>
 </html>
