@@ -13,22 +13,21 @@
 
   <body>
     <script>
-      let arr = [1, 2, 3, 4, 5];
-      function myMap(arr, callback) {
-        var newarr = [];
-        arr.forEach((item) => newarr.push(callback(item)));
-
-        console.log(newarr);
-        return newarr;
-      }
-
-
-      
-      function getCube(item) {
-        return item ** 3;
-      }
-
-      myMap(arr, getCube);
+      let vasia = { name: "Вася", age: 25 };
+      let petia = { name: "Петя", age: 30 };
+      let masha = { name: "Маша", age: 28 };
+      let egor = { name: "Егор", age: 40 };
+      let dima = { name: "Дима", age: 35 };
+      let lena = { name: "Лена", age: 18 };
+      let users = [vasia, petia, masha, egor, dima, lena];
+      let massege='средний возраст работников';
+      getAverageAge = (users) => {
+        let newArr = users.map((item) => item["age"]);
+        result = newArr.reduce((sum, current) => sum + current);
+        result = Math.floor(result / newArr.length);
+        return result;
+      };
+      console.log(massege+" "+ getAverageAge(users)+" "+"лет");
     </script>
   </body>
 </html>
