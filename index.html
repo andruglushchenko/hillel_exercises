@@ -13,18 +13,18 @@
 
   <body>
     <script>
-      function structureUserInfo() {
+      function structureUserInfo(x) {
         let obj = {};
 
-        return function (x, y) {
+        return function (y) {
           obj.role = x;
           obj.name = y;
 
           return obj;
         }
       }
-      let userInfo=structureUserInfo();
-      console.log(userInfo('Admin','John'))
+      let userInfo=structureUserInfo('Admin')('John');
+      console.log(userInfo)
 
 
     </script>
