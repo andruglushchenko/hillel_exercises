@@ -13,13 +13,15 @@
 
   <body>
     <script>
-      let string = "ПриВЕт";
+      let str = "ПриВЕт";
       function filterUpperCase() {
         return console.log(
-         result= this.split("").filter((item) => item == item.toUpperCase())
+          (result = str.split
+            .call(str, "")
+            .filter((item) => item == item.toUpperCase()))
         );
       }
-      filterUpperCase.call(string);
+      filterUpperCase(str);
     </script>
   </body>
 </html>
