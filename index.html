@@ -13,20 +13,13 @@
 
   <body>
     <script>
-      function structureUserInfo(x) {
-        let obj = {};
-
-        return function (y) {
-          obj.role = x;
-          obj.name = y;
-
-          return obj;
-        }
+      let string = "ПриВЕт";
+      function filterUpperCase() {
+        return console.log(
+         result= this.split("").filter((item) => item == item.toUpperCase())
+        );
       }
-      let userInfo=structureUserInfo('Admin')('John');
-      console.log(userInfo)
-
-
+      filterUpperCase.call(string);
     </script>
   </body>
 </html>
