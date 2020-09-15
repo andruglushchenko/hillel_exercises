@@ -15,10 +15,8 @@
     <script>
       let str = "ПриВЕт";
       function filterUpperCase() {
-        return console.log(
-          (result = str.split
-            .call(str, "")
-            .filter((item) => item == item.toUpperCase()))
+        console.log(
+          (result = [].filter.call(str, (item) => item == item.toUpperCase()))
         );
       }
       filterUpperCase(str);
