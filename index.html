@@ -13,32 +13,11 @@
 
   <body>
     <script>
-      function getPasswordFromUser(success, fail) {
-        let password = prompt("Password?", "");
-        if (password == "rockstar") success();
-        else fail();
+      function filterUpperCase(str) {
+        let result;
+        return result = [].filter.call(str, (item) => item == item.toUpperCase());
       }
-
-      let user = {
-        name: "Andrew",
-
-        loginSuccess() {
-          alert(`${this.name} logged in`);
-        },
-
-        loginFail() {
-          alert(`${this.name} failed to log in`);
-        },
-      };
-
-      getPasswordFromUser(
-        user.loginSuccess.bind(user),
-        user.loginFail.bind(user)
-      );
-
-      // с помощью bind привязали контекст user к функциям loginSuccess и loginFail,
-      // чтобы передать их в getPasswordFromUser с контекстом т.к. при вызове этих
-      // функций this=undefined
+      console.log(filterUpperCase("ПриВЕт"));
     </script>
   </body>
 </html>
