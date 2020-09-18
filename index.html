@@ -13,11 +13,43 @@
 
   <body>
     <script>
-      function filterUpperCase(str) {
-        let result;
-        return result = [].filter.call(str, (item) => item == item.toUpperCase());
+  
+      function User(name, grades) {
+        this.name = name;
+        this.averageMark = function () {
+          let result;
+          result = grades.reduce((sum, curent) => sum + curent);
+          return result / grades.length;
+        };
+        this.maxMark = function () {
+          return Math.max(...grades);
+        };
+        this.minMark = function () {
+          return Math.min(...grades);
+        };
       }
-      console.log(filterUpperCase("ПриВЕт"));
+
+      let student1 = new User("andrew", [6, 7, 6, 6, 6]);
+      let student2 = new User("artem", [10, 10, 8, 9, 9]);
+      let student3 = new User("anna", [9, 10, 8, 9, 9]);
+      let student4 = new User("vanya", [5, 9, 9, 10, 8]);
+      let student5 = new User("olga", [9, 10, 8, 4, 3]);
+
+      let studentList = [student1, student2, student3, student4, student5];
+
+      function findMaxMark(studentList) {
+        let highestScore = 0;
+        let studentHiestScore = {};
+        
+        for (let i = 0; i < studentList.length; i++) {
+          if (studentList[i].averageMark() > highestScore) {
+            highestScore = studentList[i].averageMark();
+            studentHiestScore = studentList[i];
+          }
+        }
+        return `${studentHiestScore.name} студент с наивысшей оценкой`;
+      }
+      console.log(findMaxMark(studentList));
     </script>
   </body>
 </html>
