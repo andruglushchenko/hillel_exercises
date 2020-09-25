@@ -18,36 +18,12 @@
           (this.surname = config.surname),
           (this.age = config.age);
       }
-      let humen1 = new Human({
-        name: "Andrew",
-        surname: "Hlushchenko",
-        age: 37,
-      });
-      let humen2 = new Human({
-        name: "Anna",
-        surname: "Ivanova",
-        age: 25,
-      });
-      let humen3 = new Human({
-        name: "Vasia",
-        surname: "Kiva",
-        age: 30,
-      });
-      let humen4 = new Human({
-        name: "Ivan",
-        surname: "Rodin",
-        age: 29,
-      });
-      let humen5 = new Human({
-        name: "Igor",
-        surname: "Petrov",
-        age: 18,
-      });
 
       Human.prototype = Object.assign(Human.prototype, {
         getFullName() {
           return `${this.name} ${this.surname}`;
         },
+
         setFullName(fullName) {
           this.fullName = fullName;
           let split = this.fullName.split(" ");
@@ -56,23 +32,18 @@
           return this.name + "," + this.surname;
         },
       });
-
-      function Student(config, marks) {
+      function Student(config) {
         Human.call(this, config);
-        this.marks = marks;
-      }
-
-      function Teacher(config) {
-        Human.call(this, config);
-        this.group = config.group;
+        this.marks = config.marks;
       }
       Student.prototype = Object.create(Human.prototype);
       Student.prototype.constructor = Student;
+
       Student.prototype = Object.assign(Student.prototype, {
         averageMark() {
-          let result;
-          result = this.marks.reduce((sum, curent) => sum + curent);
-          return result / this.marks.length;
+          return (
+            this.marks.reduce((acc, curr) => acc + curr) / this.marks.length
+          );
         },
 
         minMark() {
@@ -87,37 +58,52 @@
           return `${this.name} ${this.surname} - student`;
         },
       });
-      let student = new Student({
-        name: "vadim",
-        surname: "kutuzov",
-      },[4, 5, 10, 9, 7]);
-      console.log(student.getFullName());
-      console.log(student.averageMark());
-      console.log(student.maxMark());
-      console.log(student.minMark());
-      let group = [
-        new Student(humen1, [6, 7, 6, 6, 6]),
-        new Student(humen2, [10, 9, 10, 9, 9]),
-        new Student(humen3, [2, 7, 9, 6, 5]),
-        new Student(humen4, [10, 7, 9, 8, 9]),
-        new Student(humen5, [3, 3, 5, 9, 3]),
-      ];
-      function Teacher({ group }) {
-        this.group = group;
-      }
-      let teacher = new Teacher({ group });
-      
-      
-      Teacher.prototype = Object.assign(Teacher.prototype, {
-        // массив имен отсортированных по наивысшей оценеке
-        getListOfNamesByAverageMark() {
-          let ListOfNames = [];
-          this.group.sort((a, b) => b.averageMark() - a.averageMark());
-          this.group.forEach((item) => ListOfNames.push(item.name));
-          return ListOfNames;
-        },
+      let student1 = new Student({
+        name: "Andrew",
+        surname: "Hlushchenko",
+        age: 37,
+        marks: [10, 9, 6, 8, 9],
+      });
+      let student2 = new Student({
+        name: "Ivan",
+        surname: "Kiva",
+        age: 20,
+        marks: [7, 9, 5, 8, 7],
+      });
+      let student3 = new Student({
+        name: "Anna",
+        surname: "Ivanova",
+        age: 25,
+        marks: [5, 6, 6, 4, 3],
+      });
+      let student4 = new Student({
+        name: "Oleg",
+        surname: "Petrov",
+        age: 41,
+        marks: [3, 5, 5, 3, 3],
+      });
+      let student5 = new Student({
+        name: "Igor",
+        surname: "Rodin",
+        age: 33,
+        marks: [3, 4, 2, 3, 2],
+      });
 
-        // удалить объект студена, найденного по имени
+      let group = [student1, student2, student3, student4, student5];
+      function Teacher(config) {
+        this.group = config.group;
+      }
+      Teacher.prototype = Object.create(Human.prototype);
+      Teacher.prototype.constructor = Teacher;
+
+      Teacher.prototype = Object.assign(Teacher.prototype, {
+        // массив имен студентов отсортированный по наивысшей средней оценке
+        getListOfNamesByAverageMark() {
+          return this.group
+            .sort((a, b) => b.averageMark() - a.averageMark())
+            .map((item) => item.name);
+        },
+        // получить один объект студента по имени
         getStudentByName(name) {
           return this.group.find((item) => item.name === name);
         },
@@ -129,21 +115,32 @@
         },
         // найти объект студента по name и заменить на student (новый экземпляр ФК Student)
         updateStudentByName(student, name) {
-          this.removeStudentByName(name), this.group.push(new Student(student));
+          this.group.splice(
+            this.group.indexOf(this.getStudentByName(name)),
+            1,
+            new Student(student)
+          );
+          return this.group;
         },
       });
-      console.log(teacher.getListOfNamesByAverageMark());
-      console.log(teacher.getStudentByName("Igor"));
-      console.log(teacher.removeStudentByName("Ivan"));
-      teacher.updateStudentByName(
-        {
-          name: "Oleg",
-          surname: "Bondar",
-          age: 31,
-          marks: [9, 8, 9, 10, 9],
-        },
-        "Ivan"
-      );
+      let teacher = new Teacher({ group });
+
+      // console.log(teacher.getListOfNamesByAverageMark());
+      // console.log(teacher.getStudentByName("Oleg"));
+
+      // console.log(
+      //   teacher.updateStudentByName(
+      //     {
+      //       name: "Misha",
+      //       surname: "Circle",
+      //       age: 40,
+      //       marks: [9, 8, 4, 10, 3],
+      //     },
+      //     "Igor"
+      //   )
+      // );
+      // console.log(teacher.removeStudentByName("Anna"));
+     
     </script>
   </body>
 </html>
