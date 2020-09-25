@@ -13,16 +13,15 @@
 
   <body>
     <script>
-      function Human(config) {
-        (this.name = config.name),
-          (this.surname = config.surname),
-          (this.age = config.age);
-      }
-
-      Human.prototype = Object.assign(Human.prototype, {
+      class Human {
+        constructor(config) {
+          this.name = config.name;
+          this.surname = config.surname;
+          this.age = config.age;
+        }
         getFullName() {
           return `${this.name} ${this.surname}`;
-        },
+        }
 
         setFullName(fullName) {
           this.fullName = fullName;
@@ -30,34 +29,38 @@
           this.name = split[0];
           this.surname = split[1];
           return this.name + "," + this.surname;
-        },
-      });
-      function Student(config) {
-        Human.call(this, config);
-        this.marks = config.marks;
+        }
       }
-      Student.prototype = Object.create(Human.prototype);
-      Student.prototype.constructor = Student;
+      let humen = new Human({
+        name: "Anton",
+        surname: "Messi",
+        age: 33,
+      });
 
-      Student.prototype = Object.assign(Student.prototype, {
+      // console.log(humen.getFullName());
+      class Student extends Human {
+        constructor(config) {
+          super(config);
+          this.marks = config.marks;
+        }
         averageMark() {
           return (
             this.marks.reduce((acc, curr) => acc + curr) / this.marks.length
           );
-        },
+        }
 
         minMark() {
           return Math.min(...this.marks);
-        },
+        }
 
         maxMark() {
           return Math.max(...this.marks);
-        },
+        }
 
         getFullName() {
           return `${this.name} ${this.surname} - student`;
-        },
-      });
+        }
+      }
       let student1 = new Student({
         name: "Andrew",
         surname: "Hlushchenko",
@@ -88,31 +91,32 @@
         age: 33,
         marks: [3, 4, 2, 3, 2],
       });
-
+      // console.log(student5.averageMark());
+      // console.log(student3.getFullName());
+      // console.log(student2.minMark());
+      // console.log(student2.maxMark());
       let group = [student1, student2, student3, student4, student5];
-      function Teacher(config) {
-        this.group = config.group;
-      }
-      Teacher.prototype = Object.create(Human.prototype);
-      Teacher.prototype.constructor = Teacher;
-
-      Teacher.prototype = Object.assign(Teacher.prototype, {
+      class Teacher extends Human {
+        constructor(config) {
+          super(config);
+          this.group = config.group;
+        }
         // массив имен студентов отсортированный по наивысшей средней оценке
         getListOfNamesByAverageMark() {
           return this.group
             .sort((a, b) => b.averageMark() - a.averageMark())
             .map((item) => item.name);
-        },
+        }
         // получить один объект студента по имени
         getStudentByName(name) {
           return this.group.find((item) => item.name === name);
-        },
+        }
         // удалить объект студена, найденного по имени
         removeStudentByName(name) {
           let tempName = this.getStudentByName(name);
           this.group.splice(this.group.indexOf(tempName), 1);
           return this.group;
-        },
+        }
         // найти объект студента по name и заменить на student (новый экземпляр ФК Student)
         updateStudentByName(student, name) {
           this.group.splice(
@@ -121,14 +125,18 @@
             new Student(student)
           );
           return this.group;
-        },
+        }
+      }
+      let teacher = new Teacher({
+        name: "Vitalij",
+        surname: "Kutuzov",
+        age: 55,
+        group,
       });
-      let teacher = new Teacher({ group });
-
-      // console.log(teacher.getListOfNamesByAverageMark());
-      // console.log(teacher.getStudentByName("Oleg"));
-
-      // console.log(
+      //   console.log(teacher);
+      //   console.log(teacher.getListOfNamesByAverageMark());
+      //   console.log(teacher.getStudentByName("Oleg"));
+      //   console.log(
       //   teacher.updateStudentByName(
       //     {
       //       name: "Misha",
@@ -140,7 +148,6 @@
       //   )
       // );
       // console.log(teacher.removeStudentByName("Anna"));
-     
     </script>
   </body>
 </html>
