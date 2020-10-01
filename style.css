@@ -1,0 +1,61 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 60%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+form input {
+    display: block;
+    margin-top: 20px;
+    height: 30px;
+    width: 200px;
+    border: solid 2px green;
+    padding-left: 10px;
+    color: blue;
+}
+
+.inner {
+    width: 50%;
+
+}
+
+h3 {
+    margin-top: 10px;
+}
+
+ol li {
+    color: blue;
+    margin-top: 20px;
+}
+
+button {
+    display: block;
+    width: 200px;
+    line-height: 30px;
+    margin-top: 50px;
+    cursor: pointer;
+    background-color: limegreen;
+    border: solid 2px green;
+    border-radius: 5px;
+    color: white;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: yellow;
+    color: blue;
+    transition: 0.3s;
+}

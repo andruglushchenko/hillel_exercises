@@ -12,142 +12,24 @@
   </head>
 
   <body>
-    <script>
-      class Human {
-        constructor(config) {
-          this.name = config.name;
-          this.surname = config.surname;
-          this.age = config.age;
-        }
-        getFullName() {
-          return `${this.name} ${this.surname}`;
-        }
-
-        setFullName(fullName) {
-          this.fullName = fullName;
-          let split = this.fullName.split(" ");
-          this.name = split[0];
-          this.surname = split[1];
-          return this.name + "," + this.surname;
-        }
-      }
-      let humen = new Human({
-        name: "Anton",
-        surname: "Messi",
-        age: 33,
-      });
-
-      // console.log(humen.getFullName());
-      class Student extends Human {
-        constructor(config) {
-          super(config);
-          this.marks = config.marks;
-        }
-        averageMark() {
-          return (
-            this.marks.reduce((acc, curr) => acc + curr) / this.marks.length
-          );
-        }
-
-        minMark() {
-          return Math.min(...this.marks);
-        }
-
-        maxMark() {
-          return Math.max(...this.marks);
-        }
-
-        getFullName() {
-          return `${this.name} ${this.surname} - student`;
-        }
-      }
-      let student1 = new Student({
-        name: "Andrew",
-        surname: "Hlushchenko",
-        age: 37,
-        marks: [10, 9, 6, 8, 9],
-      });
-      let student2 = new Student({
-        name: "Ivan",
-        surname: "Kiva",
-        age: 20,
-        marks: [7, 9, 5, 8, 7],
-      });
-      let student3 = new Student({
-        name: "Anna",
-        surname: "Ivanova",
-        age: 25,
-        marks: [5, 6, 6, 4, 3],
-      });
-      let student4 = new Student({
-        name: "Oleg",
-        surname: "Petrov",
-        age: 41,
-        marks: [3, 5, 5, 3, 3],
-      });
-      let student5 = new Student({
-        name: "Igor",
-        surname: "Rodin",
-        age: 33,
-        marks: [3, 4, 2, 3, 2],
-      });
-      // console.log(student5.averageMark());
-      // console.log(student3.getFullName());
-      // console.log(student2.minMark());
-      // console.log(student2.maxMark());
-      let group = [student1, student2, student3, student4, student5];
-      class Teacher extends Human {
-        constructor(config) {
-          super(config);
-          this.group = config.group;
-        }
-        // массив имен студентов отсортированный по наивысшей средней оценке
-        getListOfNamesByAverageMark() {
-          return this.group
-            .sort((a, b) => b.averageMark() - a.averageMark())
-            .map((item) => item.name);
-        }
-        // получить один объект студента по имени
-        getStudentByName(name) {
-          return this.group.find((item) => item.name === name);
-        }
-        // удалить объект студена, найденного по имени
-        removeStudentByName(name) {
-          let tempName = this.getStudentByName(name);
-          this.group.splice(this.group.indexOf(tempName), 1);
-          return this.group;
-        }
-        // найти объект студента по name и заменить на student (новый экземпляр ФК Student)
-        updateStudentByName(student, name) {
-          this.group.splice(
-            this.group.indexOf(this.getStudentByName(name)),
-            1,
-            new Student(student)
-          );
-          return this.group;
-        }
-      }
-      let teacher = new Teacher({
-        name: "Vitalij",
-        surname: "Kutuzov",
-        age: 55,
-        group,
-      });
-      //   console.log(teacher);
-      //   console.log(teacher.getListOfNamesByAverageMark());
-      //   console.log(teacher.getStudentByName("Oleg"));
-      //   console.log(
-      //   teacher.updateStudentByName(
-      //     {
-      //       name: "Misha",
-      //       surname: "Circle",
-      //       age: 40,
-      //       marks: [9, 8, 4, 10, 3],
-      //     },
-      //     "Igor"
-      //   )
-      // );
-      // console.log(teacher.removeStudentByName("Anna"));
-    </script>
+    <div class="container">
+      <div class="inner">
+        <form>
+          <input type="text" id="student-name" placeholder="name" />
+          <input type="text" id="student-surname" placeholder="surname" />
+          <input type="text" id="student-age" placeholder="age" />
+          <input type="text" id="student-marks" placeholder="marks" />
+        </form>
+      </div>
+      <div class="inner">
+        <h3>список студентов со средней оценкой</h3>
+        <ol id="list"></ol>
+      </div>
+    </div>
+    <div class="container">
+      <button id="addStudent">add student</button>
+      <button id="update">update</button>
+    </div>
+    <script src="main.js"></script>
   </body>
 </html>
