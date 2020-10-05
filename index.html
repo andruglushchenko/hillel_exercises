@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="inner">
-        <form>
-          <input type="text" id="student-name" placeholder="name" />
-          <input type="text" id="student-surname" placeholder="surname" />
-          <input type="text" id="student-age" placeholder="age" />
-          <input type="text" id="student-marks" placeholder="marks" />
-        </form>
-      </div>
-      <div class="inner">
-        <h3>список студентов со средней оценкой</h3>
-        <ol id="list"></ol>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="inner">
+      <form id=fill-out-form>
+        <input type="text" id="student-name" placeholder="name" />
+        <input type="text" id="student-surname" placeholder="surname" />
+        <input type="number" id="age" placeholder="age" />
+        <input type="number" class="mark" id="math" placeholder="math" />
+        <input type="number" class="mark" id="biology" placeholder="biology" />
+        <input type="number" class="mark" id="chemistry" placeholder="chemistry" />
+        <input type="number" class="mark" id="literature" placeholder="literature" />
+        <input type="number" class="mark" id="geometry" placeholder="geometry" />
+      </form>
     </div>
-    <div class="container">
-      <button id="addStudent">add student</button>
-      <button id="update">update</button>
+    <div class="inner">
+      <h3>список студентов со средней оценкой</h3>
+      <ol id="list"></ol>
     </div>
-    <script src="main.js"></script>
-  </body>
+  </div>
+  <div class="container">
+    <button id="addStudent">add student</button>
+    <button id="update">update</button>
+  </div>
+  <script src="main.js"></script>
+</body>
+
 </html>

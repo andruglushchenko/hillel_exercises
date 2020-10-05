@@ -1,59 +1,39 @@
-class Human {
-    constructor({
-        name,
-        surname,
-        age
-    }) {
-        this.name = name,
-            this.surname = surname,
-            this.age = age;
-    }
-    getFullName() {
-        return `${this.name} ${this.surname}`;
-    }
-
-    setFullName(fullName) {
-        fullName = fullName.split(' ');
-        this.name = fullName[0];
-        this.surname = fullName[1];
-    }
-}
-
-class Student extends Human {
+class Student {
     constructor({
         name,
         surname,
         age,
-        marks
+        math,
+        biology,
+        chemistry,
+        literature,
+        geometry,
     }) {
-        super({
-            name,
-            surname,
-            age
-        });
-        this.marks = marks;
+        this.name = name,
+            this.surname = surname,
+            this.age = age,
+            this.math = math,
+            this.biology = biology,
+            this.chemistry = chemistry,
+            this.literature = literature,
+            this.geometry = geometry
     }
-
-    averageMark() {
-        let result
-         result=this.marks.reduce((acc, curr) => (acc + curr)) / this.marks.length;
-        return Math.floor(result)
-    }
-
-    minMark() {
-        return Math.min(...this.marks);
-    }
-
-    maxMark() {
-        return Math.max(...this.marks);
-    }
-
     getFullName() {
         return `${this.name} ${this.surname} - student`;
     }
+    averageMark() {
+        let result = 0;
+        for (let elem of markForm) {
+            result = result + Number(elem.value);
+        }
+        result = result / markForm.length;
+        return Math.floor(result)
+
+    }
+
 }
 
-class Teacher extends Human {
+class Teacher extends Student {
     constructor({
         name,
         surname,
@@ -65,34 +45,15 @@ class Teacher extends Human {
             surname,
             age
         });
-        this.group = group;
+        this.group = group
     }
     // массив оценок отсортированный по наивысшей средней оценке
     getListByAverageMark() {
         return this.group.sort((a, b) => b.averageMark() - a.averageMark()).map(item => {
-          return ` <li> ${item.name}  ${item.surname} - средняя оценка ${item.averageMark()} </li>`;
+            return ` <li> ${item.name}  ${item.surname} - средняя оценка ${item.averageMark()} </li>`;
         })
-      }
-// массив имен студентов отсортированный по наивысшей средней оценке
-   getListOfNamesByAverageMark() {
-    return this.group
-      .sort((a, b) => b.averageMark() - a.averageMark())
-      .map((item) => item.name);
-  }
-// получить один объект студента по имени
-    getStudentByName(name) {
-        return this.group.find(item => item.name === name);
     }
-// удалить объект студена, найденного по имени
-    removeStudentByName(name) {
-        let tempName = this.getStudentByName(name);
-        return this.group.splice(this.group.indexOf(tempName), 1);
-    }
-// найти объект студента по name и заменить на student (новый экземпляр ФК Student)
-    updateStudentByName(student, name) {
-        return this.group.splice(this.group.indexOf(this.getStudentByName(name)), 1, new Student(student));
-    }
-// добавить студента в группу
+    // добавить студента в группу
     addStudentToGroup(student) {
         return this.group.push(student);
     }
@@ -105,32 +66,92 @@ let teacher = new Teacher({
 });
 
 
-let addStudent = document.getElementById('addStudent');
-let updateList = document.getElementById('update');
+let addStudent = document.querySelector('#addStudent');
+let updateList = document.querySelector('#update');
+let errorSpan = document.createElement('span');
+errorSpan.classList.add('massage');
+let markForm = document.querySelectorAll('.mark');
 
 // кнопка 1
 addStudent.onclick = function () {
+    let name = document.querySelector('#student-name').value;
+    let surname = document.querySelector('#student-surname').value;
+    let math = document.querySelector('#math').value;
+    let biology = document.querySelector('#biology').value;
+    let chemistry = document.querySelector('#chemistry').value;
+    let literature = document.querySelector('#literature').value;
+    let geometry = document.querySelector('#geometry').value;
 
+    let fillOutForm = document.querySelector('#fill-out-form');
+    let elementsForm = fillOutForm.elements;
 
-    let name = document.getElementById('student-name').value;
-    let surname = document.getElementById('student-surname').value;
-    let age = document.getElementById('student-age').value;
-    let marks = document.getElementById('student-marks').value.split(',').map(Number);
+    // проверка на пустое поле и вывод сообщения
+    if (!validateFormOnRequired(elementsForm)) {
 
+        errorSpan.classList.add('error');
+        errorSpan.textContent = 'Заполните все поля!';
+        fillOutForm.append(errorSpan);
+        return false;
+    } else {
+        errorSpan.classList.remove('error')
+    }
+    // проверка на величину числа и вывод сообщения
+    if (!validateMarkForm(markForm)) {
 
+        errorSpan.classList.add('error');
+        errorSpan.textContent = 'оценка в интервале 1 до 10';
+        fillOutForm.append(errorSpan);
+        return false;
+    } else {
+        errorSpan.classList.remove('error')
+    }
 
     let student = new Student({
         name,
         surname,
         age,
-        marks,
+        math,
+        biology,
+        chemistry,
+        literature,
+        geometry
     })
 
     teacher.addStudentToGroup(student);
 }
 // кнопка 2
-   updateList.onclick = function() {
+updateList.onclick = function () {
     let list = document.querySelector('#list');
     let result = teacher.getListByAverageMark().join('')
     list.innerHTML = result;
-  }
+}
+// ф-я для проверки пустого пля
+function validateFormOnRequired(elementsForm) {
+    let valid = true;
+    for (let elem of elementsForm) {
+        if (!elem.value.length) {
+            valid = false;
+            elem.classList.add('error');
+            elem.classList.remove('success');
+        } else {
+            elem.classList.add('success');
+            elem.classList.remove('error');
+        }
+    }
+    return valid;
+}
+// ф-я для проверки величины оценки
+function validateMarkForm(markForm) {
+    let valid = true;
+    for (let elem of markForm) {
+        if (!(+elem.value >= 1 && +elem.value <= 10)) {
+            valid = false;
+            elem.classList.add('error');
+            elem.classList.remove('success');
+        } else {
+            elem.classList.add('success');
+            elem.classList.remove('error');
+        }
+    }
+    return valid;
+}

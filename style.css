@@ -22,11 +22,30 @@ form input {
     margin-top: 20px;
     height: 30px;
     width: 200px;
-    border: solid 2px green;
+    border: solid 2px blue;
     padding-left: 10px;
     color: blue;
 }
-
+form input.error{
+    border: solid 2px red;
+}
+form input.success{
+    border: solid 2px green;
+}
+.massage{
+    display: none;
+}
+.massage.error{
+    display: block;
+    margin: 20px 0 10px;
+    font-weight: bold;
+    color: white;
+    background-color:red;
+    border-radius:5px;
+    line-height: 40px;
+    width: 200px;
+    text-align: center;
+}
 .inner {
     width: 50%;
 
@@ -47,8 +66,8 @@ button {
     line-height: 30px;
     margin-top: 50px;
     cursor: pointer;
-    background-color: limegreen;
-    border: solid 2px green;
+    background-color: blueviolet;
+    border: solid 2px blueviolet;
     border-radius: 5px;
     color: white;
     text-transform: uppercase;
@@ -56,6 +75,6 @@ button {
 
 button:hover {
     background-color: yellow;
-    color: blue;
+    color:blueviolet;
     transition: 0.3s;
 }
