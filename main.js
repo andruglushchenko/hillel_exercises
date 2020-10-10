@@ -1,132 +1,157 @@
-class Order {
-    static store = [];
+class Student {
     constructor({
-        small,
-        midle,
-        big,
-        cheese,
-        tomato,
-        chicken,
-        mushrooms,
-        sausage
+        name,
+        surname,
+        age,
+        math,
+        biology,
+        chemistry,
+        literature,
+        geometry,
     }) {
-        this.small = small,
-            this.midle = midle,
-            this.big = big,
-            this.cheese = cheese,
-            this.tomato = tomato,
-            this.chicken = chicken,
-            this.mushrooms = mushrooms,
-            this.sausage = sausage
+        this.name = name,
+            this.surname = surname,
+            this.age = age,
+            this.math = math,
+            this.biology = biology,
+            this.chemistry = chemistry,
+            this.literature = literature,
+            this.geometry = geometry
     }
-    static describeOrder(data) {
-        Order.setOrder(new Order(data))
+    getFullName() {
+        return `${this.name} ${this.surname} - student`;
     }
-    static setOrder(order) {
-         console.log(order);
-        Order.store.push(order)
-        console.log(Order.store)
+    averageMark() {
+        let result = 0;
+        for (let elem of markForm) {
+            result = result + Number(elem.value);
+        }
+        result = result / markForm.length;
+        return Math.floor(result)
+
     }
 
 }
 
-let doOrder = document.querySelector('#order');
-let fillOutForm = document.querySelector('#fill-out-form');
-let confirmOrder = document.querySelector('#confirm');
-let cooking = document.querySelector('#cooking');
-let body = document.querySelector('body');
-let service = document.querySelector('#service');
-let like = document.querySelector('#like');
-let dislike = document.querySelector('#dislike');
+class Teacher extends Student {
+    constructor({
+        name,
+        surname,
+        age,
+        group
+    }) {
+        super({
+            name,
+            surname,
+            age
+        });
+        this.group = group
+    }
+    // массив оценок отсортированный по наивысшей средней оценке
+    getListByAverageMark() {
+        return this.group.sort((a, b) => b.averageMark() - a.averageMark()).map(item => {
+            return ` <li> ${item.name}  ${item.surname} - средняя оценка ${item.averageMark()} </li>`;
+        })
+    }
+    // добавить студента в группу
+    addStudentToGroup(student) {
+        return this.group.push(student);
+    }
+}
+let teacher = new Teacher({
+    name: "Vitalij",
+    surname: "Kutuzov",
+    age: 55,
+    group: [],
+});
 
 
-// проверяем при клике на кнопку правильность 
-// заполнения формы, если введено менее 3х
-// checkbox выводим сообщение об ошибке,
-// иначе появляется модальное окно
-doOrder.onclick = function () {
-    let checkboxElements = document.querySelectorAll('.checkbox');
-    let errorMassage = document.querySelector('#alert');
-    if (!validateCheckbox(checkboxElements)) {
-        errorMassage.hidden = false;
-        fillOutForm.style.marginBottom = '0px';
-        doOrder.removeAttribute('data-toggle')
+let addStudent = document.querySelector('#addStudent');
+let updateList = document.querySelector('#update');
+let errorSpan = document.createElement('span');
+errorSpan.classList.add('massage');
+let markForm = document.querySelectorAll('.mark');
+
+// кнопка 1
+addStudent.onclick = function () {
+    let name = document.querySelector('#student-name').value;
+    let surname = document.querySelector('#student-surname').value;
+    let math = document.querySelector('#math').value;
+    let biology = document.querySelector('#biology').value;
+    let chemistry = document.querySelector('#chemistry').value;
+    let literature = document.querySelector('#literature').value;
+    let geometry = document.querySelector('#geometry').value;
+
+    let fillOutForm = document.querySelector('#fill-out-form');
+    let elementsForm = fillOutForm.elements;
+
+    // проверка на пустое поле и вывод сообщения
+    if (!validateFormOnRequired(elementsForm)) {
+
+        errorSpan.classList.add('error');
+        errorSpan.textContent = 'Заполните все поля!';
+        fillOutForm.append(errorSpan);
         return false;
     } else {
-        errorMassage.hidden = true;
-        fillOutForm.style.marginBottom = '30px';
-        doOrder.setAttribute('data-toggle', "modal");
-    };
-    
-}
-// при клике подтвердить формируем заказ и добавляем 
-// его в масив заказов,последовательно выводим сообщения
-confirmOrder.onclick = function () {
-    let radioValue = fillOutForm.elements.size.value;
-    let cheese = document.querySelector('#cheese');
-    let tomato = document.querySelector('#tomato');
-    let chicken = document.querySelector('#chicken');
-    let mushrooms = document.querySelector('#mushrooms');
-    let sausage = document.querySelector('#sausage');
-    Order.describeOrder({
-        small: radioValue == 'small',
-        midle: radioValue == 'midle',
-        big: radioValue == 'big',
-        cheese: cheese.checked == true,
-        tomato: tomato.checked == true,
-        chicken: chicken.checked == true,
-        mushrooms: mushrooms.checked == true,
-        sausage: sausage.checked == true
+        errorSpan.classList.remove('error')
+    }
+    // проверка на величину числа и вывод сообщения
+    if (!validateMarkForm(markForm)) {
+
+        errorSpan.classList.add('error');
+        errorSpan.textContent = 'оценка в интервале 1 до 10';
+        fillOutForm.append(errorSpan);
+        return false;
+    } else {
+        errorSpan.classList.remove('error')
+    }
+
+    let student = new Student({
+        name,
+        surname,
+        age,
+        math,
+        biology,
+        chemistry,
+        literature,
+        geometry
     })
 
-    fillOutForm.hidden = true;/**скрываем форму */
-    doOrder.hidden = true;/**скрываем скрываем кнопку */
-    body.classList.add('center')/**устанавливаем позицию вывода сообщений по центру */
-    setTimeout(cookingShowMassage, 1000);/**выводим сообщения */
-    setTimeout(travelShowMassage, 3000);
-    setTimeout(delivereShowMassage, 6000);
-    setTimeout(serviceShowMassage, 9000);
-
+    teacher.addStudentToGroup(student);
 }
-like.onclick = function () {
-
-    setTimeout(thankShowMassage, 500);
+// кнопка 2
+updateList.onclick = function () {
+    let list = document.querySelector('#list');
+    let result = teacher.getListByAverageMark().join('')
+    list.innerHTML = result;
 }
-dislike.onclick = function () {
-    setTimeout(thankShowMassage, 500);
-}
-// ф-я для проверки ввода не менее 3х checkbox
-function validateCheckbox(checkboxElements) {
+// ф-я для проверки пустого пля
+function validateFormOnRequired(elementsForm) {
     let valid = true;
-    let sum = 0;
-    for (let elem of checkboxElements) {
-        if (elem.checked == true) {
-            sum = sum + 1;
+    for (let elem of elementsForm) {
+        if (!elem.value.length) {
+            valid = false;
+            elem.classList.add('error');
+            elem.classList.remove('success');
+        } else {
+            elem.classList.add('success');
+            elem.classList.remove('error');
         }
     }
-    if (sum < 3) {
-        valid = false;
+    return valid;
+}
+// ф-я для проверки величины оценки
+function validateMarkForm(markForm) {
+    let valid = true;
+    for (let elem of markForm) {
+        if (!(+elem.value >= 1 && +elem.value <= 10)) {
+            valid = false;
+            elem.classList.add('error');
+            elem.classList.remove('success');
+        } else {
+            elem.classList.add('success');
+            elem.classList.remove('error');
+        }
     }
-    return valid
-}
-
-function cookingShowMassage() {
-    cooking.hidden = false;
-}
-function travelShowMassage() {
-    cooking.innerHTML = 'курьер забрал пиццу';
-    cooking.style.background = 'yellow'
-}
-function delivereShowMassage() {
-    cooking.innerHTML = 'заказ доставлен';
-    cooking.style.background = 'burlywood'
-}
-function serviceShowMassage() {
-    cooking.hidden = true;
-    service.hidden = false;
-
-}
-function thankShowMassage() {
-    service.hidden = true;
-    body.innerHTML = '<b>спасибо за ваш ответ<b>!'
+    return valid;
 }
