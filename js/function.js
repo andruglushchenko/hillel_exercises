@@ -1,3 +1,7 @@
+import{doOrder,cancelOrder,fillOutForm,
+    massageCancel,confirmOrder,cooking,body,service,
+    like,dislike,checkboxElements,errorMassage,
+    radioValue,cheese,tomato,chicken,mushrooms,sausage} from './variables.js';
 function cookingShowMassage() {
     cooking.hidden = false;
 }
@@ -23,3 +27,5 @@ function thankShowMassage() {
     service.hidden = true;
     body.innerHTML = '<b>спасибо за ваш ответ<b>!'
 }
+export{cookingShowMassage,hideCancelOrderShowMassage,travelShowMassage,delivereShowMassage,
+    serviceShowMassage,thankShowMassage};

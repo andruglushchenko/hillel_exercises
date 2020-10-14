@@ -1,4 +1,4 @@
-class Order {
+export class Order {
     static store = [];
     constructor({
         small,

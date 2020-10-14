@@ -16,3 +16,5 @@ let tomato = document.querySelector('#tomato');
 let chicken = document.querySelector('#chicken');
 let mushrooms = document.querySelector('#mushrooms');
 let sausage = document.querySelector('#sausage');
+export{doOrder,cancelOrder,fillOutForm,massageCancel,confirmOrder,cooking,body,service,
+    like,dislike,checkboxElements,errorMassage,radioValue,cheese,tomato,chicken,mushrooms,sausage};

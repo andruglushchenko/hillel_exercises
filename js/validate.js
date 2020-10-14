@@ -1,5 +1,5 @@
 // ф-я для проверки ввода не менее 3х checkbox
-function validateCheckbox(checkboxElements) {
+export function validateCheckbox(checkboxElements) {
     let valid = true;
     let sum = 0;
     for (let elem of checkboxElements) {

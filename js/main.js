@@ -1,4 +1,11 @@
-
+import{doOrder,cancelOrder,fillOutForm,
+    massageCancel,confirmOrder,cooking,body,service,
+    like,dislike,checkboxElements,errorMassage,
+    radioValue,cheese,tomato,chicken,mushrooms,sausage} from './variables.js';
+import{cookingShowMassage,hideCancelOrderShowMassage,travelShowMassage,delivereShowMassage,
+        serviceShowMassage,thankShowMassage} from './function.js';
+import{validateCheckbox} from './validate.js';
+import{Order}  from './class.js';      
 // проверяем при клике на кнопку правильность 
 // заполнения формы, если введено менее 3х
 // checkbox выводим сообщение об ошибке,
