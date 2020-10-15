@@ -1,7 +1,4 @@
-import{doOrder,cancelOrder,fillOutForm,
-    massageCancel,confirmOrder,cooking,body,service,
-    like,dislike,checkboxElements,errorMassage,
-    radioValue,cheese,tomato,chicken,mushrooms,sausage} from './variables.js';
+import{doOrder,fillOutForm,massageCancel,cooking,body,service} from './variables.js';
 function cookingShowMassage() {
     cooking.hidden = false;
 }

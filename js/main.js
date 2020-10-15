@@ -1,5 +1,5 @@
 import{doOrder,cancelOrder,fillOutForm,
-    massageCancel,confirmOrder,cooking,body,service,
+    massageCancel,confirmOrder,body,
     like,dislike,checkboxElements,errorMassage,
     radioValue,cheese,tomato,chicken,mushrooms,sausage} from './variables.js';
 import{cookingShowMassage,hideCancelOrderShowMassage,travelShowMassage,delivereShowMassage,
